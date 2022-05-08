@@ -1,0 +1,32 @@
+{
+  "name": "artibot-welcome",
+  "version": "2.1.0",
+  "description": "Welcome new users to your Discord server",
+  "main": "index.js",
+	"type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoudronViande24/artibot-welcome.git"
+  },
+  "keywords": [
+    "artibot",
+    "bot",
+    "discord",
+    "artivain",
+    "welcome",
+    "bye",
+    "message"
+  ],
+  "author": "GoudronViande24",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GoudronViande24/artibot-welcome/issues"
+  },
+  "homepage": "https://github.com/GoudronViande24/artibot-welcome#readme",
+  "dependencies": {
+    "artibot": "^3.0.4"
+  }
+}
