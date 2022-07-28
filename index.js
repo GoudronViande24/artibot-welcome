@@ -73,7 +73,7 @@ function mainFunction({ client, config, config: { lang, debug, welcome: { server
 			embed.setThumbnail(`https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.webp?size=512`);
 		};
 
-		if (guild.config.welcome.customInfo) embed.addField(localizer._("Infos"), guild.config.welcome.customInfo);
+		if (guild.config.welcome.customInfo) embed.addFields({ name: localizer._("Infos"), value: guild.config.welcome.customInfo });
 
 		return await welcomeChannel.send({
 			embeds: [embed]
@@ -112,7 +112,7 @@ function mainFunction({ client, config, config: { lang, debug, welcome: { server
 			embed.setThumbnail(`https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.webp?size=512`);
 		};
 
-		if (guild.config.farewell.customInfo) embed.addField(localizer._("Infos"), guild.config.welcome.customInfo);
+		if (guild.config.farewell.customInfo) embed.addFields({ name: localizer._("Infos"), value: guild.config.welcome.customInfo });
 
 		return await farewellChannel.send({
 			embeds: [embed]

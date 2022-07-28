@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/GoudronViande24/artibot-welcome#readme",
   "dependencies": {
-    "artibot": "^3.0.4"
+    "artibot": "^4.0.0"
   }
 }
