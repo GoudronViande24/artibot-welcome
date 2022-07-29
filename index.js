@@ -25,6 +25,7 @@ export default new Module({
 	],
 	version,
 	repo: "GoudronViande24/artibot-welcome",
+	packageName: "artibot-welcome",
 	parts: [
 		new Global({
 			id: "welcome",
