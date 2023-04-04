@@ -12,18 +12,98 @@ const __dirname = path.dirname(__filename);
 const require = createRequire(import.meta.url);
 const { version } = require('../package.json');
 
-export class ArtibotWelcomeNotificationConfig {
+export interface ArtibotWelcomeNotificationConfig {
+	activate: boolean;
+	channel?: Snowflake;
+	showMemberCount: boolean;
+	showProfilePicture: boolean;
+	customInfo?: string;
+}
+
+export class ArtibotWelcomeNotificationConfigBuilder {
 	activate: boolean = false;
 	channel?: Snowflake;
 	showMemberCount: boolean = false;
 	showProfilePicture: boolean = false;
 	customInfo?: string;
+
+	/**
+	 * Activate the welcome message
+	 */
+	public enable(): this {
+		this.activate = true;
+		return this;
+	}
+
+	/**
+	 * Deactivate the welcome message
+	 */
+	public disable(): this {
+		this.activate = false;
+		return this;
+	}
+
+	/**
+	 * Set the welcome channel
+	 * @param channel The welcome channel ID
+	 */
+	public setChannel(channel: Snowflake): this {
+		this.channel = channel;
+		return this;
+	}
+
+	/**
+	 * Show the member count in the welcome message
+	 */
+	public showCount(): this {
+		this.showMemberCount = true;
+		return this;
+	}
+
+	/**
+	 * Hide the member count in the welcome message
+	 */
+	public hideCount(): this {
+		this.showMemberCount = false;
+		return this;
+	}
+
+	/**
+	 * Show the profile picture in the welcome message
+	 */
+	public showProfile(): this {
+		this.showProfilePicture = true;
+		return this;
+	}
+
+	/**
+	 * Hide the profile picture in the welcome message
+	 */
+	public hideProfile(): this {
+		this.showProfilePicture = false;
+		return this;
+	}
+
+	/**
+	 * Set the custom info in the welcome message
+	 * @param info The custom info
+	 */
+	public setCustomInfo(info: string): this {
+		this.customInfo = info;
+		return this;
+	}
 }
 
-export class ArtibotWelcomeServerConfig {
+export interface ArtibotWelcomeServerConfig {
 	name?: string;
-	welcome: ArtibotWelcomeNotificationConfig = new ArtibotWelcomeNotificationConfig();
-	farewell: ArtibotWelcomeNotificationConfig = new ArtibotWelcomeNotificationConfig();
+	welcome: ArtibotWelcomeNotificationConfig;
+	farewell: ArtibotWelcomeNotificationConfig;
+}
+
+export class ArtibotWelcomeServerConfigBuilder {
+	name?: string;
+	welcome: ArtibotWelcomeNotificationConfigBuilder = new ArtibotWelcomeNotificationConfigBuilder();
+	farewell: ArtibotWelcomeNotificationConfigBuilder = new ArtibotWelcomeNotificationConfigBuilder();
 
 	/**
 	 * Set the server name
@@ -38,9 +118,9 @@ export class ArtibotWelcomeServerConfig {
 	 * Configure the welcome message
 	 * @param callback Callback function to create the welcome configuration
 	 */
-	public setWelcomeConfig(callback: (welcome: ArtibotWelcomeNotificationConfig) => ArtibotWelcomeNotificationConfig): this {
-		const welcome: ArtibotWelcomeNotificationConfig = this.welcome;
-		const newWelcome: ArtibotWelcomeNotificationConfig = callback(welcome);
+	public setWelcomeConfig(callback: (welcome: ArtibotWelcomeNotificationConfigBuilder) => ArtibotWelcomeNotificationConfigBuilder): this {
+		const welcome: ArtibotWelcomeNotificationConfigBuilder = this.welcome;
+		const newWelcome: ArtibotWelcomeNotificationConfigBuilder = callback(welcome);
 		this.welcome = newWelcome;
 		return this;
 	}
@@ -49,12 +129,18 @@ export class ArtibotWelcomeServerConfig {
 	 * Configure the farewell message
 	 * @param callback Callback function to create the farewell configuration
 	 */
-	public setFarewellConfig(callback: (farewell: ArtibotWelcomeNotificationConfig) => ArtibotWelcomeNotificationConfig): this {
-		const farewell: ArtibotWelcomeNotificationConfig = this.farewell;
-		const newFarewell: ArtibotWelcomeNotificationConfig = callback(farewell);
+	public setFarewellConfig(callback: (farewell: ArtibotWelcomeNotificationConfigBuilder) => ArtibotWelcomeNotificationConfigBuilder): this {
+		const farewell: ArtibotWelcomeNotificationConfigBuilder = this.farewell;
+		const newFarewell: ArtibotWelcomeNotificationConfigBuilder = callback(farewell);
 		this.farewell = newFarewell;
 		return this;
 	}
+}
+
+export interface ArtibotWelcomeConfig {
+	servers: {
+		[key: Snowflake]: ArtibotWelcomeServerConfig;
+	};
 }
 
 /**
@@ -62,9 +148,9 @@ export class ArtibotWelcomeServerConfig {
  * @author GoudronViande24
  * @since 4.0.0
  */
-export class ArtibotWelcomeConfig {
+export class ArtibotWelcomeConfigBuilder {
 	servers: {
-		[key: Snowflake]: ArtibotWelcomeServerConfig;
+		[key: Snowflake]: ArtibotWelcomeServerConfigBuilder;
 	} = {};
 
 	/**
@@ -72,9 +158,9 @@ export class ArtibotWelcomeConfig {
 	 * @param id The server ID
 	 * @param callback Callback function to create the server configuration
 	 */
-	public addServer(id: Snowflake, callback: (server: ArtibotWelcomeServerConfig) => ArtibotWelcomeServerConfig): this {
-		const server: ArtibotWelcomeServerConfig = new ArtibotWelcomeServerConfig();
-		const newServer: ArtibotWelcomeServerConfig = callback(server);
+	public addServer(id: Snowflake, callback: (server: ArtibotWelcomeServerConfigBuilder) => ArtibotWelcomeServerConfigBuilder): this {
+		const server: ArtibotWelcomeServerConfigBuilder = new ArtibotWelcomeServerConfigBuilder();
+		const newServer: ArtibotWelcomeServerConfigBuilder = callback(server);
 		this.servers[id] = newServer;
 		return this;
 	}
