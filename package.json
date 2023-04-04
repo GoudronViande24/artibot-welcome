@@ -1,11 +1,19 @@
 {
   "name": "artibot-welcome",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "Welcome new users to your Discord server",
-  "main": "index.js",
-	"type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "LICENSE",
+    "locales.json"
+  ],
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc",
+		"prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -27,6 +35,9 @@
   },
   "homepage": "https://github.com/GoudronViande24/artibot-welcome#readme",
   "dependencies": {
-    "artibot": "^4.0.0"
+    "artibot": "^5.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.3"
   }
 }

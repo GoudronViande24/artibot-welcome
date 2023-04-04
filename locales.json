@@ -10,8 +10,8 @@
 			"fr": "[[0]] vient de rejoindre [[1]]"
 		},
 
-		"[[0]] is not in configuration file.": {
-			"fr": "[[0]] n'est pas dans le fichier de configuration."
+		"[[0]] is not in configuration.": {
+			"fr": "[[0]] n'est pas dans la configuration."
 		},
 
 		"Welcome in [[0]] server!": {
@@ -44,6 +44,30 @@
 
 		"Ready.": {
 			"fr": "Prêt."
+		},
+
+		"No welcome channel set for [[0]]": {
+			"fr": "Aucun salon de bienvenue n'est défini pour [[0]]"
+		},
+
+		"Welcome channel not found for [[0]]": {
+			"fr": "Le salon de bienvenue n'a pas été trouvé pour [[0]]"
+		},
+
+		"Welcome channel is not text based for [[0]]": {
+			"fr": "Le salon de bienvenue n'est pas un salon textuel pour [[0]]"
+		},
+
+		"No farewell channel set for [[0]]": {
+			"fr": "Aucun salon d'au revoir n'est défini pour [[0]]"
+		},
+
+		"Farewell channel not found for [[0]]": {
+			"fr": "Le salon d'au revoir n'a pas été trouvé pour [[0]]"
+		},
+
+		"Farewell channel is not text based for [[0]]": {
+			"fr": "Le salon d'au revoir n'est pas un salon textuel pour [[0]]"
 		}
 	}
 }
